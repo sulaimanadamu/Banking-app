@@ -10,7 +10,7 @@ var accountBalance float64 = 10000.00
 var accountBalanceFile string = "balance.txt"
 
 func writeBalanceToFile(balance float64) {
-	balanceText := fmt.Sprint(accountBalance)
+	balanceText := fmt.Sprint(balance)
 	os.WriteFile("balance.txt", []byte(balanceText), 0644)
 }
 
@@ -22,7 +22,6 @@ func getBalanceFromFile() (balance float64) {
 }
 
 func Transaction() {
-
 	fmt.Println("Welcome to soul Bank!")
 	fmt.Println("What do you want to do?")
 	fmt.Println("1. Check balance")
@@ -33,38 +32,6 @@ func Transaction() {
 	for i := 1; i > 0; i++ {
 		fmt.Print("Enter an input: ")
 		choice := getInput()
-
-		//Method 1:
-		//Advantage:
-		//easy to break the loop.
-
-		// if choice == 1 {
-		// 	fmt.Println("your account balance is:", accountBalance)
-		// } else if choice == 2 {
-		// 	fmt.Print("Enter a Deposit: ")
-		// 	credit := float64(getInput())
-		// 	if credit > 0 {
-		// 		accountBalance += credit
-		// 		fmt.Println("The new balance is:", accountBalance)
-		// 	} else {
-		// 		fmt.Println("No zero or negative deposit")
-		// 	}
-
-		// } else if choice == 3 {
-		// 	fmt.Print("Enter withdrawal amount: ")
-		// 	debit := float64(getInput())
-		// 	if debit > accountBalance {
-		// 		fmt.Println("can't withdraw this much!, your current balance is: ", accountBalance)
-		// 	} else {
-		// 		accountBalance -= float64(debit)
-		// 		fmt.Println("Your new balance:", accountBalance)
-		// 	}
-		// } else if choice == 4 {
-		// 	fmt.Println("EXIT")
-		// 	return
-		// } else {
-		// 	fmt.Println("Invalid input")
-		// }
 
 		switch choice {
 		case 1:
@@ -102,9 +69,4 @@ func Transaction() {
 func getInput() (input int) {
 	fmt.Scan(&input)
 	return
-}
-
-func Writer(filename string) {
-	//os.WriteFile("exercise.txt")
-
 }

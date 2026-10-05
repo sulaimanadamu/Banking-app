@@ -1,0 +1,4 @@
+Structure of each userdata file is 
+first line : pin
+second line : name
+next line : balance.

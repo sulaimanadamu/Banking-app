@@ -3,7 +3,7 @@ package profile
 import (
 	"bankApp/util"
 	"errors"
-	"os"
+	"fmt"
 	"strconv"
 )
 
@@ -12,25 +12,36 @@ var email string
 var userName string
 var pin int64
 
-func createUser(name, userName string, pin int) {
+func CreateUser(name, userName string, pin int64) (string, error) {
 	// create file by user name in /UserData/
-	fileName := "../UserData/" + userName + ".txt"
-	_, err := os.Stat(fileName)
+	src := "./UserData/"
+	format := ".txt"
+	filePath := src + userName + format
+	util.WriteTo(filePath, util.IntToString(pin))
+	util.WriteTo(filePath, name)
+	util.WriteTo(filePath, "0.00")
+	return filePath, nil
+}
+
+// return username, this is then used as file search name.
+func Login(userName string, pin int64) (string, error) {
+	src := "./UserData/"
+	format := ".txt"
+	filePath := src + userName + format
+
+	_, err := authorization(userName, pin)
+	// using error instead of return value, because its more descriptive.
 	if err != nil {
-
+		fmt.Println(err)
+		return "", errors.New("Username, password or both may not be correct try again.")
 	} else {
-		// no error
-		// append per line pin, name, email, password to the file.
-		util.WriteTo(userName, strconv.Itoa(pin))
-		util.WriteTo(userName, "name: "+name)
-
+		fmt.Printf("Successfully logged in user %s", userName)
+		return filePath, nil
 	}
-
 }
 
 func authorization(userName string, pin int64) (bool, error) {
 	src := "../UserData/"
-	// check if the user id matches password
 	format := ".txt"
 	filename := src + userName + format
 

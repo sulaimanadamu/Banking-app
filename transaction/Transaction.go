@@ -7,29 +7,12 @@ import (
 	"strconv"
 )
 
-// var accountBalance float64 = 10000.00
-// var accountBalanceFile string = "balance.txt"
-
-// func writeBalanceToFile(balance float64) {
-// 	balanceText := fmt.Sprint(balance)
-// 	os.WriteFile("balance.txt", []byte(balanceText), 0644)
-// }
-
-// func getBalanceFromFile() (balance float64) {
-// 	data, _ := os.ReadFile(accountBalanceFile)
-// 	balanceText := string(data)
-// 	balance, _ = strconv.ParseFloat(balanceText, 64)
-// 	return
-// }
-
 func Transaction(filePath string) error {
-
 	lastLine := util.GetTextLineValue(filePath, -1)
-	fmt.Println("last line value is ", lastLine)
 
 	accountBalance, _ := util.StringToFloat(lastLine)
 
-	fmt.Printf("Welcome to soul Bank! %s", util.GetTextLineValue(filePath, 2))
+	fmt.Printf("Welcome to soul Bank! %s \n", util.GetTextLineValue(filePath, 2))
 	fmt.Println("What do you want to do?")
 	fmt.Println("1. Check balance")
 	fmt.Println("2. Deposit money")
@@ -49,12 +32,11 @@ func Transaction(filePath string) error {
 			switch choice {
 			case 1:
 				fmt.Println("your account balance is: ", util.GetTextLineValue(filePath, -1))
-				fmt.Println(filePath)
 			case 2:
 				fmt.Print("Enter a Deposit: ")
 				credit, err := strconv.ParseFloat(util.GetInput(), 64)
 				if err != nil {
-					return errors.New("nter your value in decimal and make sure they are all numbers.")
+					return errors.New("enter your value in decimal and make sure they are all numbers.")
 				} else {
 					if credit > 0 {
 						accountBalance += credit

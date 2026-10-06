@@ -35,13 +35,13 @@ func Login(userName string, pin int64) (string, error) {
 		fmt.Println(err)
 		return "", errors.New("Username, password or both may not be correct try again.")
 	} else {
-		fmt.Printf("Successfully logged in user %s", userName)
+		fmt.Printf("Successfully logged in user %s \n", userName)
 		return filePath, nil
 	}
 }
 
 func authorization(userName string, pin int64) (bool, error) {
-	src := "../UserData/"
+	src := "./UserData/"
 	format := ".txt"
 	filename := src + userName + format
 
